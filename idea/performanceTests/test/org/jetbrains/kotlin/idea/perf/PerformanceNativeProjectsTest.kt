@@ -97,7 +97,7 @@ class PerformanceNativeProjectsTest : AbstractPerformanceProjectsTest() {
             val enableCommonizer = true
 
             TestTarget.values().forEach { testTarget ->
-                if (!testTarget.enabled) {
+                if (!testTarget.enabled || testTarget == LINUX) {
                     logMessage { "Warm-up for test target $testTarget is disabled" }
                     return@forEach
                 }
