@@ -9,7 +9,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.util.CachedValue
 import com.intellij.psi.util.CachedValueProvider
 import com.intellij.psi.util.CachedValuesManager
-import com.intellij.psi.util.PsiModificationTracker
 import com.intellij.util.containers.ContainerUtil
 import org.jetbrains.kotlin.cfg.ControlFlowInformationProvider
 import org.jetbrains.kotlin.container.get
@@ -93,7 +92,7 @@ class ResolveElementCache(
             CachedValueProvider<MutableMap<KtExpression, CachedPartialResolve>> {
                 CachedValueProvider.Result.create(
                     ContainerUtil.createConcurrentWeakKeySoftValueMap<KtExpression, CachedPartialResolve>(),
-                    PsiModificationTracker.MODIFICATION_COUNT,
+                    KotlinCodeBlockModificationListener.getInstance(project).kotlinOutOfCodeBlockTracker,
                     resolveSession.exceptionTracker
                 )
             },
